@@ -1,0 +1,43 @@
+<div *ngIf="recipe">
+  <h3>{{ recipe.title }}</h3>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <img [src]="recipe.image">
+    </div>
+    <div class="col">
+        <p class="border border-info text-info text-center rounded-pill" *ngIf="recipe.vegan">Vegan</p> 
+        <p class="border border-success text-success text-center rounded-pill" *ngIf="recipe.vegetarian">Vegetarian</p>
+        <p class="border border-warning text-warning text-center rounded-pill" *ngIf="recipe.glutenFree">Gluten Free</p>
+        <div class="mt-3" *ngIf="recipe.readyInMinutes > 0">
+          <img src="assets/icons/clock-time.svg" class="icon">
+          <span class="ml-3">Ready in {{ recipe.readyInMinutes }} minutes</span>
+        </div>
+        <div class="mt-3" *ngIf="recipe.cuisines?.length > 0">
+          <img src="assets/icons/kitchen-pack.svg" class="icon">
+          <span class="ml-3">{{ recipe.cuisines }}</span>
+        </div>
+        <div class="mt-3" *ngIf="recipe.diets?.length > 0">
+          <img src="assets/icons/shaker.svg" class="icon">
+          <span class="ml-3">{{ recipe.diets }}</span>
+        </div>
+        <div class="mt-3" *ngIf="recipe.sourceUrl">
+          <img src="assets/icons/software.svg" class="icon">
+          <span class="ml-3">
+            <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.sourceUrl }}</a>
+          </span>
+        </div>
+    </div>
+  </div>
+  <h4 class="mt-3">Summary</h4>
+  <hr>
+  <p [innerHTML]="recipe.summary"></p>
+  <h4 class="mt-3">Instructions</h4>
+  <hr>
+  <p [innerHTML]="recipe.instructions"></p>
+  <h4 class="mt-3">Similar Recipes</h4>
+  <hr>
+  <div class="list-group" *ngFor="let recipe of similarRecipes">
+    <button class="list-group-item list-group-item-action">{{ recipe.title }}</button>
+  </div>
+</div>
